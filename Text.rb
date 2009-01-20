@@ -2,6 +2,7 @@ require 'Drawable'
 
 class Text < Drawable
 	@@fontData=nil
+	@scaleFactor
 	def write(str)
 		loadFontData if @@fontData.nil?
 		cx=0
@@ -13,14 +14,18 @@ class Text < Drawable
 			f.each do |sl|
 				sl.each_byte do |pixel|
 					if(pixel == 49)
-						@points.push([x,y])
+						@scaleFactor.times do |h|
+							@scaleFactor.times do |v|
+								@points.push([x+h,y+v])
+							end
+						end
 					end
-					x=x+1
+					x=x+@scaleFactor
 				end
-				y=y+1
+				y=y+@scaleFactor
 				x=cx
 			end
-			cx=cx+8
+			cx=cx+8*@scaleFactor
 		end
 	end
 	def loadFontData
@@ -40,6 +45,6 @@ class Text < Drawable
 	end
 	def initialize
 		super
-		puts @points.class
+		@scaleFactor=3
 	end
 end
