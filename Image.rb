@@ -4,12 +4,17 @@ class Image
 	@buffer
 
 	@offsetFactor
+
+	@cursor_x
+	@cursor_y
 	def initialize(width,height)
 		@width=width
 		@height=height
 		x=[255].pack("c")
 		@buffer=x*(height*width*3)
 		@offsetFactor=width*3
+		@cursor_x=0
+		@cursor_y=0
 	end
 	def write(name="out.pnm")
 		file=File.open(name,"wb")
@@ -26,11 +31,16 @@ class Image
 		@buffer[offset,3]=[r,g,b].pack("ccc")
 	end
 
+	def getCursor
+		[@cursor_x,@cursor_y]
+	end
+	def setCursor(x,y)
+		@cursor_x=x
+		@cursor_y=y
+	end
+	
+	def draw(d)
+		d.render(self)
+	end
 end
 
-i=Image.new(100,100)
-
-	(0..50).each do |p|
-		i.putpixel(p,p,255,0,0)
-	end
-	i.write

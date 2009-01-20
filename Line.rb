@@ -1,42 +1,39 @@
-require 'Image'
-class Line
-	def right(image,d)
-		(x,y)=image.getCursor
-		(x..x+d).each do |xx|
-			image.putpixel(xx,y)
+require 'Drawable'
+class Line < Drawable
+	@cursor_x
+	@cursor_y
+	def right(d)
+		bx=@cursor_x
+		@cursor_x=@cursor_x+d
+		(bx..@cursor_x).each do |x|
+			@points.push([x,@cursor_y])
 		end
-		image.setCursor(x+d,y)
 	end
-	def left(image,d)
-		(x,y)=image.getCursor
-		(x-d..x).each do |xx|
-			image.putpixel(xx,y)
+	def left(d)
+		bx=@cursor_x
+		@cursor_x=@cursor_x-d
+		(@cursor_x..bx).each do |x|
+			@points.push([x,@cursor_y])
 		end
-		image.setCursor(x-d,y)
 	end
 
-	def up(image,d)
-		(x,y)=image.getCursor
-		(y-d..y).each do |yy|
-			image.putpixel(x,yy)
+	def up(d)
+		by=@cursor_y
+		@cursor_y=@cursor_y-d
+		(@cursor_y..by).each do |y|
+			@points.push([@cursor_x,y])
 		end
-		image.setCursor(x,y-d)
 	end
-	def down(image,d)
-		(x,y)=image.getCursor
-		(y..y+d).each do |yy|
-			image.putpixel(x,yy)
+	def down(d)
+		by=@cursor_y
+		@cursor_y=@cursor_y+d
+		(by..@cursor_y).each do |y|
+			@points.push([@cursor_x,y])
 		end
-		image.setCursor(x,y+d)
+	end
+	def initialize
+		super
+		@cursor_x=0
+		@cursor_y=0
 	end
 end
-
-i=Image.new(100,100)
-	i.setCursor(50,50)
-	l=Line.new
-	l.right(i,20)
-	l.up(i,20)
-	l.left(i,20)
-	l.down(i,20)
-
-i.write("/mnt/hgfs/tabos/Downloads/out.pnm")
