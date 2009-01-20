@@ -5,7 +5,6 @@ class Drawable
 	@b
 	def render(image)
 		(cx,cy)=image.getCursor
-		puts @points.length
 		@points.each do |p|
 			(x,y)=p
 			x+=cx
