@@ -6,7 +6,7 @@ require 'Text'
 
 
 def drawNumber(canvas,x,y,val,name) # represent a val in 32 bits
-	bit=Box.new(10,10)
+	bit=Box.new(20,20)
 	bit.setColor(125,127,127)
 	t=Text.new
 	t.setColor(255,0,0)
@@ -19,9 +19,9 @@ def drawNumber(canvas,x,y,val,name) # represent a val in 32 bits
 		canvas.setCursor(x+2,y+2)
 		canvas.draw(t)
 		t.clear
-		x=x+10
+		x=x+20
 	end
-	canvas.setCursor(x+10,y)
+	canvas.setCursor(x+20,y)
 	t.write(name)
 	canvas.draw(t)
 end
@@ -40,7 +40,7 @@ symbols["b"]=7
 canvas=Image.new(800,500)
 t=Text.new
 t.setColor(0,0,255)
-bit=Box.new(20,20)
+bit=Box.new(40,40)
 x=20
 y=20
 structure.each_line do |line|
@@ -61,5 +61,12 @@ structure.each_line do |line|
 	puts size
 
 end
+t.clear
+t.write("She sells sea shells on the sea shore")
+canvas.setCursor(20,100)
+canvas.draw(t)
+canvas.setCursor(20,118)
+canvas.draw(t)
+
 canvas.write("/mnt/hgfs/tabos/Downloads/out.pnm")
 

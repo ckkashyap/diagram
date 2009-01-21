@@ -13,10 +13,18 @@ class Text < Drawable
 			y=cy
 			f.each do |sl|
 				sl.each_byte do |pixel|
-					if(pixel == 49)
+					if(pixel != 32)
+						r=@r
+						g=@g
+						b=@b
+						if (pixel == 43)
+							r=r+((255-r)/2)
+							g=g+((255-g)/2)
+							b=b+((255-b)/2)
+						end
 						@scaleFactor.times do |h|
 							@scaleFactor.times do |v|
-								@points.push([x+h,y+v])
+								@points.push([x+h,y+v,r,g,b])
 							end
 						end
 					end
@@ -25,18 +33,17 @@ class Text < Drawable
 				y=y+@scaleFactor
 				x=cx
 			end
-			cx=cx+8*@scaleFactor
+			cx=cx+16*@scaleFactor
 		end
 	end
 	def loadFontData
 		@@fontData=Array.new
 		ctr=0
 		arr=Array.new
-		IO.foreach("font_8x8.c") do |line|
-			next unless /^\s+0x[0-9a-fA-F]+, .. ([01]+) ..$/.match(line)
+		IO.foreach("fonts") do |line|
 			ctr=ctr+1
-			arr.push($1)
-			if(ctr==8)
+			arr.push(line.chomp!)
+			if(ctr==20)
 				ctr=0
 				@@fontData.push(arr)
 				arr=Array.new

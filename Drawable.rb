@@ -6,10 +6,15 @@ class Drawable
 	def render(image)
 		(cx,cy)=image.getCursor
 		@points.each do |p|
-			(x,y)=p
+			(x,y,r,g,b)=p
+			if r.nil?
+				r=@r
+				g=@g
+				b=@b
+			end
 			x+=cx
 			y+=cy
-			image.putpixel(x,y,@r,@g,@b)
+			image.putpixel(x,y,r,g,b)
 		end
 	end
 	def initialize
