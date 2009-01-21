@@ -16,15 +16,13 @@ b1=Box.new(100,100)
 
 	t=Text.new
 	t.setColor(0,0,255)
-	t.write("HELLO")
+	t.write("She sells sea shells on the sea shore")
 
 
 i.setCursor(100,100)
 i.draw(l)
 i.setCursor(120,100)
 i.draw(b)
-i.setCursor(125,95)
-i.draw(t)
 	a=false
 	50.times do |x|
 	i.setCursor(320+x,100+x)
@@ -39,5 +37,7 @@ i.draw(t)
 	i.draw(b1)
 	end
 
+i.setCursor(125,95)
+i.draw(t)
 i.write("/mnt/hgfs/tabos/Downloads/out.pnm")
 

@@ -13,13 +13,16 @@ class Box < Line
 		super()
 		case type
 			when 0
+				down(h)
+				right(w)
+				up(h)
+				left(w)
+			when 1
 				down(h/2)
 				right(w)
 				up(h)
 				left(w)
 				down(h/2)
-			when 1
-				puts "DINGO"
 		end
 	end
 end

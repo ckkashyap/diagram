@@ -21,4 +21,7 @@ class Drawable
 		@g=g
 		@b=b
 	end
+	def clear
+		@points=Array.new
+	end
 end

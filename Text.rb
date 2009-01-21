@@ -45,6 +45,6 @@ class Text < Drawable
 	end
 	def initialize
 		super
-		@scaleFactor=3
+		@scaleFactor=1
 	end
 end
