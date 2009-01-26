@@ -36,4 +36,14 @@ class Line < Drawable
 		@cursor_x=0
 		@cursor_y=0
 	end
+
+
+		
+	def drawLine(x1,y1,x2,y2)
+		`./line #{x1} #{y1} #{x2} #{y2}`.each_line do |l|
+		/(\d+) (\d+) (\d+)/.match(l)
+		@points.push([$1.to_i,$2.to_i,$3.to_i,$3.to_i,$3.to_i])
+		end
+
+	end
 end

@@ -7,7 +7,12 @@ class Text < Drawable
 		loadFontData if @@fontData.nil?
 		cx=0
 		cy=0
+		max_x=0
 		str.each_byte do |b|
+			if b==32
+				cx=cx+16
+				next
+			end
 			f=@@fontData[b]
 			x=cx
 			y=cy
@@ -17,11 +22,12 @@ class Text < Drawable
 						r=@r
 						g=@g
 						b=@b
-						if (pixel == 43)
+						if (pixel == 43) # == '+' that is
 							r=r+((255-r)/2)
 							g=g+((255-g)/2)
 							b=b+((255-b)/2)
 						end
+						max_x=x if x > max_x
 						@scaleFactor.times do |h|
 							@scaleFactor.times do |v|
 								@points.push([x+h,y+v,r,g,b])
@@ -34,6 +40,7 @@ class Text < Drawable
 				x=cx
 			end
 			cx=cx+16*@scaleFactor
+			#cx=max_x+1
 		end
 	end
 	def loadFontData

@@ -30,11 +30,13 @@ end
 structure=<<'END'
 int id;
 char b;
+short vijay;
 END
 
 symbols=Hash.new
 symbols["id"]=20
 symbols["b"]=7
+symbols["vijay"]=100
 
 
 canvas=Image.new(800,500)
@@ -66,6 +68,15 @@ t.write("She sells sea shells on the sea shore")
 canvas.setCursor(20,100)
 canvas.draw(t)
 canvas.setCursor(20,118)
+canvas.draw(t)
+t.clear
+t.write("The quick brown fox jumped over the lazy dog")
+canvas.setCursor(20,136)
+canvas.draw(t)
+t.clear
+t.setColor(127,127,127)
+t.write("Where there is a will, there is pay")
+canvas.setCursor(20,136+18)
 canvas.draw(t)
 
 canvas.write("/mnt/hgfs/tabos/Downloads/out.pnm")
